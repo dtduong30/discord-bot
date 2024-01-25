@@ -56,4 +56,49 @@ async def on_message(message):
             await command_dict[command](message)
 
 
+# Start each command with the @bot.command decorater
+@bot.command()
+async def square(ctx, arg):  # The name of the function is the name of the command
+    print(arg)  # this is the text that follows the command
+    await ctx.send(int(arg) ** 2)  # ctx.send sends text in chat
+
+
+@bot.command()
+async def scrabblepoints(ctx, arg):
+    # Key for point values of each letter
+    score = {
+        "a": 1,
+        "c": 3,
+        "b": 3,
+        "e": 1,
+        "d": 2,
+        "g": 2,
+        "f": 4,
+        "i": 1,
+        "h": 4,
+        "k": 5,
+        "j": 8,
+        "m": 3,
+        "l": 1,
+        "o": 1,
+        "n": 1,
+        "q": 10,
+        "p": 3,
+        "s": 1,
+        "r": 1,
+        "u": 1,
+        "t": 1,
+        "w": 4,
+        "v": 4,
+        "y": 4,
+        "x": 8,
+        "z": 10,
+    }
+    points = 0
+    # Sum the points for each letter
+    for c in arg:
+        points += score[c]
+    await ctx.send(points)
+
+
 bot.run(TOKEN)
